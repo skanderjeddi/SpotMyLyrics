@@ -26,7 +26,7 @@ No specific installation is required.
 
 ## Credits
 
-Thanks to the creator of the [SwSpotify](https://github.com/SwagLyrics/SwSpotify) for providing me with the necessary code for getting the currently playing song on Spotify (currently only for MacOS).
+Thanks to the creator of the [SwSpotify](https://github.com/SwagLyrics/SwSpotify) project for providing me with the necessary code for getting the currently playing song on Spotify (currently only for macOS, might extend to other OSes in the future but it is highly unlikely considering Windows would require the usage of JNI and I'm not too keen on that currently).
 
 ## License
 
