@@ -1,5 +1,5 @@
 # SpotMyLyrics
-A simple Java application to fetch lyrics of the current Spotify songs (MacOS only)
+A Java application used to automatically fetch (and store) the lyrics to the current Spotify song from the website AZLyrics (only on macOS!)
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ then
 
 ### Prerequisites
 
-You'll need Java 8>.
+You'll need Java 8> and you'll need to have Spotify installed.
 
 ### Installing
 
