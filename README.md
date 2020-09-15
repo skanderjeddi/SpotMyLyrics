@@ -10,7 +10,7 @@ then
 
 ### Prerequisites
 
-You'll need Java 8> and you'll need to have Spotify installed.
+You'll need Java 8> and to have [Spotify](https://www.spotify.com) installed.
 
 ### Installing
 
@@ -26,7 +26,7 @@ No specific installation is required.
 
 ## Credits
 
-Thanks to the creator of the [SwSpotify](https://github.com/SwagLyrics/SwSpotify) project for providing me with the necessary code for getting the currently playing song on Spotify (currently only for macOS, might extend to other OSes in the future but it is highly unlikely considering Windows would require the usage of JNI and I'm not too keen on that currently).
+Thanks to the creator of the [SwSpotify](https://github.com/SwagLyrics/SwSpotify) project for providing me with the necessary AppleScript code for getting the currently playing song on Spotify (currently only for macOS, might extend to other OSes in the future but it is highly unlikely considering Windows would require the usage of JNI and I'm not too keen on that currently).
 
 ## License
 
