@@ -10,11 +10,11 @@ then
 
 ### Prerequisites
 
-* All platforms: you'll need Java 14> and to have [Spotify](https://www.spotify.com) installed (although the software should work even with Java 8 after a proper recompilation).
+* All platforms: Java 14> and [Spotify](https://www.spotify.com) are required (although the software should work even with Java 8 after a proper recompilation).
 
-* Windows + Linux: you'll need to have Python 3 installed.
+* Windows + Linux: Python3 needs to be installed on your system.
 
-* macOS: no additional software needs to be installed.
+* macOS: no additional software is needed.
 
 ### Installing
 
