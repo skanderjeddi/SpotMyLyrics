@@ -183,7 +183,7 @@ public final class SpotMyLyrics {
 			compliantArtist = compliantArtist.replace("The ", SpotMyLyrics.EMPTY);
 		}
 		// OLD EXPRESSION: [•èÈÊÂÎêâîïÏÇçôÔ\\?\\-,.()!’'&¿\\:°/]
-		return compliantArtist.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9 ]", SpotMyLyrics.EMPTY).toLowerCase().strip();
+		return compliantArtist.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9]", SpotMyLyrics.EMPTY).toLowerCase().replaceAll(SpotMyLyrics.SPACE, EMPTY).strip();
 	}
 
 	/**
@@ -199,7 +199,7 @@ public final class SpotMyLyrics {
 			final int start = compliantTitle.indexOf("(");
 			compliantTitle = compliantTitle.substring(0, start);
 		}
-		return compliantTitle.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9 ]", SpotMyLyrics.EMPTY).toLowerCase().strip();
+		return compliantTitle.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9]", SpotMyLyrics.EMPTY).toLowerCase().replaceAll(SpotMyLyrics.SPACE, EMPTY).strip();
 	}
 
 	/**
