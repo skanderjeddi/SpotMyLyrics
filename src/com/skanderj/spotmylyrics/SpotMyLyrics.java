@@ -33,7 +33,7 @@ public final class SpotMyLyrics {
 	public static final String GITHUB_URL = "https://github.com/skanderjeddi";
 
 	// Enable/disable verbose
-	public static final boolean VERBOSE = false;
+	public static final boolean VERBOSE = true;
 
 	// The base URL used to fetch lyrics
 	public static final String AZLYRICS_URL = "https://www.azlyrics.com/lyrics/%s/%s.html";
@@ -390,7 +390,7 @@ public final class SpotMyLyrics {
 	 * @return a File object pointing to the lyrics file theoretical location
 	 */
 	public File getLocalCopy(final String artist, final String track) {
-		final String compliantArtist = artist.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_").replaceAll("[\\.\\?]", SpotMyLyrics.EMPTY), compliantTitle = track.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_").replaceAll("[\\.\\?]", SpotMyLyrics.EMPTY);
+		final String compliantArtist = artist.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_").replaceAll("[\\.\\?\\(']", SpotMyLyrics.EMPTY), compliantTitle = track.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_").replaceAll("[\\.\\?\\(']", SpotMyLyrics.EMPTY);
 		return new File(SpotMyLyrics.CACHE, String.format("/%s/%s.txt", compliantArtist, compliantTitle));
 	}
 
@@ -493,7 +493,7 @@ public final class SpotMyLyrics {
 			}
 		} else {
 			if (lyrics != null) {
-				System.out.println("\n" + artist + " - " + track +  "\n\n" + lyrics + "\n");
+				System.out.println("\n" + artist + " - " + track + "\n\n" + lyrics + "\n");
 				this.saveToLocalCopy(compliantArtist, compliantTitle, lyrics, false);
 			} else {
 				System.out.println("\n" + artist + " - " + track + "\n\n" + "No lyrics found." + "\n");
