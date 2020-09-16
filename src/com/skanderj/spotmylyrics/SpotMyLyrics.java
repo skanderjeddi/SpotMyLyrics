@@ -254,7 +254,7 @@ public final class SpotMyLyrics {
 		}
 	}
 
-	public final String readProcessOutput(final String[] args) throws Exception {
+	public String readProcessOutput(final String[] args) throws Exception {
 		String output = new String();
 		final ProcessBuilder processBuilder = new ProcessBuilder(args);
 		// Mandatory
@@ -274,7 +274,7 @@ public final class SpotMyLyrics {
 		if (SpotMyLyrics.VERBOSE) {
 			System.out.printf("Querying Spotify for the current song...\n");
 		}
-		String answer = EMPTY;
+		String answer = SpotMyLyrics.EMPTY;
 		try {
 			final String[] pythonScriptArgs = { "python", "./scripts/getspotifyinfowin.py" };
 			answer = this.readProcessOutput(pythonScriptArgs);
@@ -299,7 +299,7 @@ public final class SpotMyLyrics {
 		if (SpotMyLyrics.VERBOSE) {
 			System.out.printf("Querying Spotify for the current song...\n");
 		}
-		String answer = EMPTY;
+		String answer = SpotMyLyrics.EMPTY;
 		try {
 			final String[] appleScriptArgs = { "osascript", "-e", SpotMyLyrics.APPLESCRIPT_CODE };
 			answer = this.readProcessOutput(appleScriptArgs);
@@ -357,7 +357,7 @@ public final class SpotMyLyrics {
 	 * @return a File object pointing to the lyrics file theoretical location
 	 */
 	public File getLocalCopy(final String artist, final String track) {
-		final String compliantArtist = artist.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_"), compliantTitle = track.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_");
+		final String compliantArtist = artist.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_").replaceAll("[\\.\\?]", SpotMyLyrics.EMPTY), compliantTitle = track.toLowerCase().replaceAll(SpotMyLyrics.SPACE, "_").replaceAll("[\\.\\?]", SpotMyLyrics.EMPTY);
 		return new File(SpotMyLyrics.CACHE, String.format("/%s/%s.txt", compliantArtist, compliantTitle));
 	}
 
@@ -460,10 +460,10 @@ public final class SpotMyLyrics {
 			}
 		} else {
 			if (lyrics != null) {
-				System.out.println("\n" + artist.replaceAll("[\\('\\)]", EMPTY) + " - " + track.replaceAll("[\\('\\)]", EMPTY) + "\n\n" + lyrics + "\n");
+				System.out.println("\n" + artist.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + " - " + track.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + "\n\n" + lyrics + "\n");
 				this.saveToLocalCopy(compliantArtist, compliantTitle, lyrics, false);
 			} else {
-				System.out.println("\n" + artist.replaceAll("[\\('\\)]", EMPTY) + " - " + track.replaceAll("[\\('\\)]", EMPTY) + "\n\n" + "No lyrics found." + "\n");
+				System.out.println("\n" + artist.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + " - " + track.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + "\n\n" + "No lyrics found." + "\n");
 			}
 		}
 	}
