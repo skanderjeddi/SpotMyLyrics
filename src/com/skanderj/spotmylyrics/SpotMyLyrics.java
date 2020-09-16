@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -83,7 +85,7 @@ public final class SpotMyLyrics {
 	/**
 	 * @return the size of the cache (or how many local copies of lyrics)
 	 */
-	public int cacheSize() {
+	public int cachedItems() {
 		return this.countFiles(SpotMyLyrics.CACHE);
 	}
 
@@ -105,6 +107,40 @@ public final class SpotMyLyrics {
 			}
 		}
 		return counter;
+	}
+
+	/**
+	 * @return the size in bytes of the cache.
+	 */
+	public long cacheSize() {
+		return this.fileSize(SpotMyLyrics.CACHE);
+	}
+
+	/**
+	 * @return the size in bytes of the @param file.
+	 */
+	private long fileSize(final File file) {
+		long length = 0;
+		if (file.isDirectory()) {
+			for (final File subFile : file.listFiles()) {
+				length += subFile.isDirectory() ? this.fileSize(subFile) : subFile.length();
+			}
+		} else {
+			return file.length();
+		}
+		return length;
+	}
+
+	public String humanReadableByteCountSI(long bytes) {
+		if (-1000 < bytes && bytes < 1000) {
+			return bytes + " B";
+		}
+		final CharacterIterator characterIterator = new StringCharacterIterator("kMGTPE");
+		while (bytes <= -999_950 || bytes >= 999_950) {
+			bytes /= 1000;
+			characterIterator.next();
+		}
+		return String.format("%.1f %cB", bytes / 1000.0, characterIterator.current());
 	}
 
 	/**
@@ -246,9 +282,9 @@ public final class SpotMyLyrics {
 
 	public String[] querySpotify() {
 		if (SpotMyLyrics.OS.contains("win")) {
-			return this.querySpotify_windows();
-		} else if (SpotMyLyrics.OS.contains("macos")) {
-			return this.querySpotify_macOS();
+			return this.querySpotify_WIN();
+		} else if (SpotMyLyrics.OS.contains("mac os")) {
+			return this.querySpotify_MACOS();
 		} else {
 			return null;
 		}
@@ -270,7 +306,7 @@ public final class SpotMyLyrics {
 		return output;
 	}
 
-	public String[] querySpotify_windows() {
+	public String[] querySpotify_WIN() {
 		if (SpotMyLyrics.VERBOSE) {
 			System.out.printf("Querying Spotify for the current song...\n");
 		}
@@ -295,7 +331,7 @@ public final class SpotMyLyrics {
 	 *
 	 * @return (artist, track, strippedArtist, strippedTitle)
 	 */
-	public String[] querySpotify_macOS() {
+	public String[] querySpotify_MACOS() {
 		if (SpotMyLyrics.VERBOSE) {
 			System.out.printf("Querying Spotify for the current song...\n");
 		}
@@ -578,7 +614,7 @@ public final class SpotMyLyrics {
 	 */
 	public void run() {
 		System.out.printf("SpotMyLyrics v.%s - By Skander J. (%s)\nThanks for using my software!\n", SpotMyLyrics.SPOT_MY_LYRICS_VERSION, SpotMyLyrics.GITHUB_URL);
-		System.out.printf("(Cache size: %d)\n", this.cacheSize());
+		System.out.printf("(Cache size: %s bytes for %d items)\n", this.humanReadableByteCountSI(this.cacheSize()), this.cachedItems());
 		final Scanner scanner = new Scanner(System.in);
 		System.out.print("Press [ENTER] key to continue...");
 		scanner.nextLine();

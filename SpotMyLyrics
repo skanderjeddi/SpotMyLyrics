@@ -1,5 +1,5 @@
 #!/bin/zsh
-cd ./scripts/
+cd ./scripts/build/
 ./build.zsh
-cd ../
+cd ../../
 java -jar SpotMyLyrics.jar
