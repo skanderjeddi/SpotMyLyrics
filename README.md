@@ -10,14 +10,11 @@ then
 
 ### Prerequisites
 
-* All platforms
-You'll need Java 14> and to have [Spotify](https://www.spotify.com) installed.
+* All platforms: you'll need Java 14> and to have [Spotify](https://www.spotify.com) installed (although the software should work even with Java 8 after a proper recompilation).
 
-* Windows + Linux
-You'll need to have Python 3 installed.
+* Windows + Linux: you'll need to have Python 3 installed.
 
-* macOS
-No additional software needs to be installed.
+* macOS: no additional software needs to be installed.
 
 ### Installing
 
@@ -33,7 +30,7 @@ No specific installation is required.
 
 ## Credits
 
-Thanks to the creator of the [SwSpotify](https://github.com/SwagLyrics/SwSpotify) project for providing me with the necessary scripts for getting the currently playing song on Spotify (currently for macOS and Windows, Linux support coming soon).
+Thanks to the creator of the [SwSpotify](https://github.com/SwagLyrics/SwSpotify) project for providing me with the necessary scripts for getting the currently playing song on Spotify.
 
 ## License
 
