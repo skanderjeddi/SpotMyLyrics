@@ -379,7 +379,7 @@ public final class SpotMyLyrics {
 		if (SpotMyLyrics.VERBOSE) {
 			System.out.printf("Found %s - %s\n", artist, track);
 		}
-		return new String[] { artist, track, strippedArtist, strippedTitle };
+		return new String[] { artist.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY), track.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY), strippedArtist.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY), strippedTitle.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) };
 	}
 
 	/**
@@ -493,10 +493,10 @@ public final class SpotMyLyrics {
 			}
 		} else {
 			if (lyrics != null) {
-				System.out.println("\n" + artist.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + " - " + track.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + "\n\n" + lyrics + "\n");
+				System.out.println("\n" + artist + " - " + track +  "\n\n" + lyrics + "\n");
 				this.saveToLocalCopy(compliantArtist, compliantTitle, lyrics, false);
 			} else {
-				System.out.println("\n" + artist.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + " - " + track.replaceAll("[\\('\\)]", SpotMyLyrics.EMPTY) + "\n\n" + "No lyrics found." + "\n");
+				System.out.println("\n" + artist + " - " + track + "\n\n" + "No lyrics found." + "\n");
 			}
 		}
 	}
