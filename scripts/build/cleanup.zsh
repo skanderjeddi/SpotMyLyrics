@@ -1,3 +1,3 @@
 #!/bin/zsh
-cd ../
+cd ../..
 rm SpotMyLyrics.jar
