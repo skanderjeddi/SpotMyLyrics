@@ -128,11 +128,11 @@ public final class SpotMyLyrics {
 	}
 
 	public String humanReadableByteCountSI(long bytes) {
-		if (-1000 < bytes && bytes < 1000) {
+		if ((-1000 < bytes) && (bytes < 1000)) {
 			return bytes + " B";
 		}
 		final CharacterIterator characterIterator = new StringCharacterIterator("kMGTPE");
-		while (bytes <= -999_950 || bytes >= 999_950) {
+		while ((bytes <= -999_950) || (bytes >= 999_950)) {
 			bytes /= 1000;
 			characterIterator.next();
 		}
@@ -183,7 +183,7 @@ public final class SpotMyLyrics {
 			compliantArtist = compliantArtist.replace("The ", SpotMyLyrics.EMPTY);
 		}
 		// OLD EXPRESSION: [•èÈÊÂÎêâîïÏÇçôÔ\\?\\-,.()!’'&¿\\:°/]
-		return compliantArtist.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9]", SpotMyLyrics.EMPTY).toLowerCase().replaceAll(SpotMyLyrics.SPACE, EMPTY).strip();
+		return compliantArtist.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9]", SpotMyLyrics.EMPTY).toLowerCase().replaceAll(SpotMyLyrics.SPACE, SpotMyLyrics.EMPTY).strip();
 	}
 
 	/**
@@ -199,7 +199,7 @@ public final class SpotMyLyrics {
 			final int start = compliantTitle.indexOf("(");
 			compliantTitle = compliantTitle.substring(0, start);
 		}
-		return compliantTitle.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9]", SpotMyLyrics.EMPTY).toLowerCase().replaceAll(SpotMyLyrics.SPACE, EMPTY).strip();
+		return compliantTitle.replaceAll("é", "e").replaceAll("É", "E").replaceAll("à", "a").replaceAll("À", "A").replaceAll("[^a-zA-Z0-9]", SpotMyLyrics.EMPTY).toLowerCase().replaceAll(SpotMyLyrics.SPACE, SpotMyLyrics.EMPTY).strip();
 	}
 
 	/**

@@ -1,7 +1,7 @@
-./com/skanderj/spotmylyrics/SpotMyLyrics.class
 ./com/skanderj/spotmylyrics/SpotMyLyrics$1.class
-./com/skanderj/ts4j/TaskScheduler.class
-./com/skanderj/ts4j/TimeValue.class
+./com/skanderj/spotmylyrics/SpotMyLyrics.class
 ./com/skanderj/ts4j/Task.class
-./com/skanderj/ts4j/TaskType.class
 ./com/skanderj/ts4j/TaskScheduler$1.class
+./com/skanderj/ts4j/TaskScheduler.class
+./com/skanderj/ts4j/TaskType.class
+./com/skanderj/ts4j/TimeValue.class
