@@ -100,11 +100,7 @@ public final class SpotMyLyrics {
 		}
 		int counter = 0;
 		for (final File child : file.listFiles()) {
-			if (child.isDirectory()) {
-				counter += this.countFiles(child);
-			} else {
-				counter += 1;
-			}
+			counter += child.isDirectory() ? this.countFiles(child) : 1;
 		}
 		return counter;
 	}
