@@ -1,5 +1,5 @@
 # SpotMyLyrics
-A Java application used to automatically fetch (and store) the lyrics to the current Spotify song from the website AZLyrics (macOS + Windows, Linux support coming soon!)
+A Java application used to automatically fetch (and store) the lyrics to the current Spotify song from the website AZLyrics! NOW CROSSPLATFORM!
 
 ## Getting Started
 
@@ -10,7 +10,14 @@ then
 
 ### Prerequisites
 
-You'll need Java 8> and to have [Spotify](https://www.spotify.com) installed.
+* All platforms
+You'll need Java 14> and to have [Spotify](https://www.spotify.com) installed.
+
+* Windows + Linux
+You'll need to have Python 3 installed.
+
+* macOS
+No additional software needs to be installed.
 
 ### Installing
 
