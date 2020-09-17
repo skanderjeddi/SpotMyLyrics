@@ -20,5 +20,5 @@ def get_info_linux():
         return "PAUSED"
     return artist, track
 
-    if __name__ == "__main__":
-        print(get_info_linux())
+if __name__ == "__main__":
+    print(get_info_linux())
