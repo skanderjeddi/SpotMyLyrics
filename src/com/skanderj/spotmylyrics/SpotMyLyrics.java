@@ -33,7 +33,7 @@ public final class SpotMyLyrics {
 	public static final String GITHUB_URL = "https://github.com/skanderjeddi";
 
 	// Enable/disable verbose
-	public static final boolean VERBOSE = true;
+	public static final boolean VERBOSE = false;
 
 	// The base URL used to fetch lyrics
 	public static final String AZLYRICS_URL = "https://www.azlyrics.com/lyrics/%s/%s.html";
@@ -127,6 +127,10 @@ public final class SpotMyLyrics {
 		return length;
 	}
 
+	/**
+	 * @return a String converting the raw @param bytes into human readable, SI
+	 *         format.
+	 */
 	public String humanReadableByteCountSI(long bytes) {
 		if ((-1000 < bytes) && (bytes < 1000)) {
 			return bytes + " B";
@@ -277,16 +281,28 @@ public final class SpotMyLyrics {
 		return source.substring(warningIndex + SpotMyLyrics.TARGET_WARNING.length(), endDivTagIndex).strip();
 	}
 
+	/**
+	 * @return a (artist, track) pair if found.
+	 */
 	public String[] querySpotify() {
 		if (SpotMyLyrics.OS.contains("win")) {
-			return this.querySpotify_WIN();
+			return this.querySpotiftWINDOWS();
 		} else if (SpotMyLyrics.OS.contains("mac os")) {
-			return this.querySpotify_MACOS();
+			return this.querySpotifyMACOS();
+		} else if (SpotMyLyrics.OS.contains("linux")) {
+			return this.querySpotifyLINUX();
 		} else {
 			return null;
 		}
 	}
 
+	/**
+	 * Runs a script through the underlying system.
+	 * 
+	 * @param args
+	 * @return the process' output
+	 * @throws Exception
+	 */
 	public String readProcessOutput(final String[] args) throws Exception {
 		String output = new String();
 		final ProcessBuilder processBuilder = new ProcessBuilder(args);
@@ -303,7 +319,13 @@ public final class SpotMyLyrics {
 		return output;
 	}
 
-	public String[] querySpotify_WIN() {
+	/**
+	 * Gets the currently playing song on Spotify. Relies on a Python script
+	 * included in /scripts/.
+	 *
+	 * @return (artist, track, strippedArtist, strippedTitle)
+	 */
+	public String[] querySpotiftWINDOWS() {
 		if (SpotMyLyrics.VERBOSE) {
 			System.out.printf("Querying Spotify for the current song...\n");
 		}
@@ -323,12 +345,11 @@ public final class SpotMyLyrics {
 	}
 
 	/**
-	 * !!! ONLY WORKS ON macOS !!! Gets the currently playing song on Spotify.
-	 * Relies on AppleScript.
+	 * Gets the currently playing song on Spotify. Relies on AppleScript.
 	 *
 	 * @return (artist, track, strippedArtist, strippedTitle)
 	 */
-	public String[] querySpotify_MACOS() {
+	public String[] querySpotifyMACOS() {
 		if (SpotMyLyrics.VERBOSE) {
 			System.out.printf("Querying Spotify for the current song...\n");
 		}
@@ -343,6 +364,37 @@ public final class SpotMyLyrics {
 		return this.formatAnswer(answer);
 	}
 
+	/**
+	 * Gets the currently playing song on Spotify. Relies on a Python script
+	 * included in /scripts/.
+	 *
+	 * @return (artist, track, strippedArtist, strippedTitle)
+	 */
+	public String[] querySpotifyLINUX() {
+		if (SpotMyLyrics.VERBOSE) {
+			System.out.printf("Querying Spotify for the current song...\n");
+		}
+		String answer = SpotMyLyrics.EMPTY;
+		try {
+			final String[] pythonScriptArgs = { "python", "./scripts/getspotifyinfolinux.py" };
+			answer = this.readProcessOutput(pythonScriptArgs);
+		} catch (final Exception exception) {
+			System.err.println("An error occurred while querying Spotify for the current song: " + exception.getMessage());
+			return null;
+		}
+		if (answer.equals("PAUSED") || answer.equals("NOT RUNNING")) {
+			System.err.println("Spotify is either paused or not running, can't identify the current track!");
+			return null;
+		}
+		return this.formatAnswer(answer);
+	}
+
+	/**
+	 * Formats the script's output pair (artist, track)
+	 * 
+	 * @param answer
+	 * @return { formatted artist name, formatted track name, stripped artist name, stripped track name }
+	 */
 	public String[] formatAnswer(String answer) {
 		final String originalAnswer = new StringBuilder(answer).toString();
 		// If we have aliases setup
