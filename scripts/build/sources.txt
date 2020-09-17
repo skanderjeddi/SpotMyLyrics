@@ -1,4 +1,6 @@
-./src/com/skanderj/spotmylyrics/SpotMyLyrics.java
+./src/com/skanderj/spotmylyrics/SML.java
+./src/com/skanderj/spotmylyrics/SMLSYS.java
+./src/com/skanderj/spotmylyrics/SMLIO.java
 ./src/com/skanderj/ts4j/TaskScheduler.java
 ./src/com/skanderj/ts4j/TimeValue.java
 ./src/com/skanderj/ts4j/TaskType.java

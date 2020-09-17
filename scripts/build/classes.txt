@@ -1,5 +1,9 @@
-./com/skanderj/spotmylyrics/SpotMyLyrics.class
-./com/skanderj/spotmylyrics/SpotMyLyrics$1.class
+./com/skanderj/spotmylyrics/SML$1.class
+./com/skanderj/spotmylyrics/SMLSYS.class
+./com/skanderj/spotmylyrics/SMLSYS$1.class
+./com/skanderj/spotmylyrics/SML.class
+./com/skanderj/spotmylyrics/SMLIO.class
+./com/skanderj/spotmylyrics/SMLSYS$SMLSYSOS.class
 ./com/skanderj/ts4j/TaskScheduler.class
 ./com/skanderj/ts4j/TimeValue.class
 ./com/skanderj/ts4j/Task.class
