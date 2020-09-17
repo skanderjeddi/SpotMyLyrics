@@ -79,6 +79,13 @@ public final class SML {
 	}
 
 	/**
+	 * Deletes all the files in the cache.
+	 */
+	public boolean clearCache() {
+		return SMLIO.deleteFile(SML.CACHE);
+	}
+
+	/**
 	 * Formats an artist name for usage in the AZLyrics base URL. Conditions: - All
 	 * lowercase - No spaces - No extra whitespace - No special characters
 	 *
@@ -137,9 +144,10 @@ public final class SML {
 
 	/**
 	 * Formats the script's output pair (artist, track)
-	 * 
+	 *
 	 * @param answer
-	 * @return { formatted artist name, formatted track name, stripped artist name, stripped track name }
+	 * @return { formatted artist name, formatted track name, stripped artist name,
+	 *         stripped track name }
 	 */
 	public String[] formatAnswer(String answer) {
 		final String originalAnswer = new StringBuilder(answer).toString();
@@ -331,13 +339,6 @@ public final class SML {
 	 */
 	public void disableAutoRefreshing() {
 		TaskScheduler.cancelTask("SpotifyQuery", false);
-	}
-
-	/**
-	 * Deletes all the files in the cache.
-	 */
-	public boolean clearCache() {
-		return SMLIO.deleteFile(SML.CACHE);
 	}
 
 	/**

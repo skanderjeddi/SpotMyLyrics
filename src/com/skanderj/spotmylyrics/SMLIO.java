@@ -15,8 +15,8 @@ import java.text.StringCharacterIterator;
 import java.util.Map;
 
 public final class SMLIO {
-    private SMLIO() {
-        return;
+	private SMLIO() {
+		return;
 	}
 
 	/**
@@ -68,8 +68,8 @@ public final class SMLIO {
 		}
 		return source.toString().strip();
 	}
-	
-	public static final boolean readFileToMap(final File file, final Map<String, String> map, final String separator) {
+
+	public static boolean readFileToMap(final File file, final Map<String, String> map, final String separator) {
 		if (SML.VERBOSE) {
 			System.out.printf("Reading aliases from %s...", file.getAbsolutePath());
 		}
@@ -101,7 +101,7 @@ public final class SMLIO {
 	 * @param file the file
 	 * @return the contents of the file
 	 */
-	public static final String readWhole(final File file) {
+	public static String readWhole(final File file) {
 		if (SML.VERBOSE) {
 			System.out.printf("Reading %s...", file.getAbsolutePath());
 		}
@@ -133,11 +133,11 @@ public final class SMLIO {
 	/**
 	 * Stores a string in a local file on the HDD.
 	 *
-	 * @param file the target file
+	 * @param file   the target file
 	 * @param string the content to save
 	 * @return true if success, false otherwise
 	 */
-	public static final boolean saveToFile(final File file, final String string, final boolean override) {
+	public static boolean saveToFile(final File file, final String string, final boolean override) {
 		if (SML.VERBOSE) {
 			System.out.printf("Saving %s...", file.getAbsolutePath());
 		}
@@ -163,12 +163,12 @@ public final class SMLIO {
 		}
 	}
 
-    /**
+	/**
 	 * Recursively counts the number of files in a given directory.
 	 *
 	 * @return the number of files if @param file is a directory, -1 otherwise
 	 */
-	public static final int countFiles(final File file) {
+	public static int countFiles(final File file) {
 		if (!file.isDirectory()) {
 			return -1;
 		}
@@ -177,12 +177,12 @@ public final class SMLIO {
 			counter += child.isDirectory() ? SMLIO.countFiles(child) : 1;
 		}
 		return counter;
-    }
-    
-    /**
+	}
+
+	/**
 	 * @return the size in bytes of the @param file.
 	 */
-	public static final long fileSize(final File file) {
+	public static long fileSize(final File file) {
 		long length = 0;
 		if (file.isDirectory()) {
 			for (final File subFile : file.listFiles()) {
@@ -192,13 +192,13 @@ public final class SMLIO {
 			return file.length();
 		}
 		return length;
-    }
-    
-    /**
+	}
+
+	/**
 	 * @return a String converting the raw @param bytes into human readable, SI
 	 *         format.
 	 */
-	public static final String humanReadableByteCountSI(long bytes) {
+	public static String humanReadableByteCountSI(long bytes) {
 		if ((-1000 < bytes) && (bytes < 1000)) {
 			return bytes + " B";
 		}
@@ -208,12 +208,12 @@ public final class SMLIO {
 			characterIterator.next();
 		}
 		return String.format("%.1f %cB", bytes / 1000.0, characterIterator.current());
-    }
-    
-    /**
+	}
+
+	/**
 	 * Recursively deletes a directory.
 	 */
-	public static final boolean deleteFile(final File file) {
+	public static boolean deleteFile(final File file) {
 		if (file.isDirectory()) {
 			boolean result = true;
 			for (final File subFile : file.listFiles()) {

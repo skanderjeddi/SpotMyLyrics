@@ -4,25 +4,25 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public final class SMLSYS {
-    private SMLSYS() { 
-        return;
-    }
+	private SMLSYS() {
+		return;
+	}
 
-    // Get the system OS
-    public static final SMLSYSOS OS = System.getProperty("os.name").toLowerCase().contains("win") ? SMLSYSOS.WINDOWS : System.getProperty("os.name").toLowerCase().contains("mac os") ? SMLSYSOS.MACOS : System.getProperty("os.name").toLowerCase().contains("linux") ? SMLSYSOS.LINUX : SMLSYSOS.OTHER;
-    
-    // AppleScript code used to fetch the currently playing Spotify song (only on
+	// Get the system OS
+	public static final SMLSYSOS OS = System.getProperty("os.name").toLowerCase().contains("win") ? SMLSYSOS.WINDOWS : System.getProperty("os.name").toLowerCase().contains("mac os") ? SMLSYSOS.MACOS : System.getProperty("os.name").toLowerCase().contains("linux") ? SMLSYSOS.LINUX : SMLSYSOS.OTHER;
+
+	// AppleScript code used to fetch the currently playing Spotify song (only on
 	// macOS)
 	public static final String APPLESCRIPT_CODE = "getCurrentlyPlayingTrack()\n" + "on getCurrentlyPlayingTrack()\n" + "tell application \"Spotify\"\n" + "set isPlaying to player state as string\n" + "set currentArtist to artist of current track as string\n" + "set currentTrack to name of current track as string\n" + "return {currentArtist, currentTrack}\n" + "end tell\n" + "end getCurrentlyPlayingTrack";
 
-    /**
+	/**
 	 * Runs a script through the underlying system.
-	 * 
+	 *
 	 * @param args
 	 * @return the process' output
 	 * @throws Exception
 	 */
-	public static final String readProcessOutput(final String[] args) throws Exception {
+	public static String readProcessOutput(final String[] args) throws Exception {
 		String output = new String();
 		final ProcessBuilder processBuilder = new ProcessBuilder(args);
 		// Mandatory
@@ -36,32 +36,32 @@ public final class SMLSYS {
 		process.waitFor();
 		reader.close();
 		return output;
-    }
+	}
 
-    	/**
+	/**
 	 * @return a (artist, track) pair if found.
 	 */
-	public static final String querySpotify() {
+	public static String querySpotify() {
 		if (SML.VERBOSE) {
 			System.out.printf("Querying Spotify for the current song...\n");
-        }
-        String answer = SML.EMPTY;
-        try {
-            String[] scriptArgs;
-            switch (SMLSYS.OS) {
-                case WINDOWS:
-                    scriptArgs = new String[] { "python", "./scripts/getspotifyinfowin.py" };
-                    break;
-                case MACOS:
-                    scriptArgs = new String[] { "osascript", "-e", SMLSYS.APPLESCRIPT_CODE };
-                    break;
-                case LINUX:
-                    scriptArgs = new String[] { "python", "./scripts/getspotifyinfolinux.py" };
-                    break;
-                case OTHER:
-                default:
-                    return null;
-            }
+		}
+		String answer = SML.EMPTY;
+		try {
+			String[] scriptArgs;
+			switch (SMLSYS.OS) {
+			case WINDOWS:
+				scriptArgs = new String[] { "python", "./scripts/getspotifyinfowin.py" };
+				break;
+			case MACOS:
+				scriptArgs = new String[] { "osascript", "-e", SMLSYS.APPLESCRIPT_CODE };
+				break;
+			case LINUX:
+				scriptArgs = new String[] { "python", "./scripts/getspotifyinfolinux.py" };
+				break;
+			case OTHER:
+			default:
+				return null;
+			}
 			answer = SMLSYS.readProcessOutput(scriptArgs);
 		} catch (final Exception exception) {
 			System.err.println("An error occurred while querying Spotify for the current song: " + exception.getMessage());
@@ -73,8 +73,8 @@ public final class SMLSYS {
 		}
 		return answer;
 	}
-    
-    public static enum SMLSYSOS {
-        WINDOWS, MACOS, LINUX, OTHER;
-    }
+
+	public enum SMLSYSOS {
+		WINDOWS, MACOS, LINUX, OTHER;
+	}
 }

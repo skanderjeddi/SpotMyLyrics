@@ -7,10 +7,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
 /**
- * 
+ *
  * The main class for the TS4J project. Use this class to schedule and cancel
  * tasks.
- * 
+ *
  * @author Skander J.
  *
  */
