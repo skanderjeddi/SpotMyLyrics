@@ -40,7 +40,7 @@ public final class SML {
 	public static final String EMPTY = new StringBuilder().toString(), SPACE = new StringBuilder(" ").toString();
 
 	// Aliases file, can be customized
-	public static final File ALIASES_FILE = new File("./aliases.txt");
+	public static final File ALIASES_FILE = new File("aliases.txt");
 
 	// Cache folder for storing and loading local lyrics files
 	public static final File CACHE = new File("./cache/");
@@ -150,11 +150,15 @@ public final class SML {
 	 *         stripped track name }
 	 */
 	public String[] formatAnswer(String answer) {
-		final String originalAnswer = new StringBuilder(answer).toString();
+		String originalAnswer = new StringBuilder(answer).toString();
 		// If we have aliases setup
 		for (final String alias : this.aliases.keySet()) {
 			if (answer.contains(alias)) {
-				answer = answer.replace(alias, this.aliases.get(alias)).strip();
+				if (SML.VERBOSE) {
+					System.out.printf("Found an alias for %s: %s\n", answer, alias);
+				}
+				answer = answer.replaceAll(alias, this.aliases.get(alias)).strip();
+				originalAnswer = originalAnswer.replaceAll(alias, this.aliases.get(alias)).strip();
 			}
 		}
 		// We don't need the (feat...) part or the (- ...) part or the (with...) part
