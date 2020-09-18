@@ -1,5 +1,6 @@
 ./com/skanderj/spotmylyrics/SML$1.class
 ./com/skanderj/spotmylyrics/SMLSYS.class
+./com/skanderj/spotmylyrics/SMLSYS$OS.class
 ./com/skanderj/spotmylyrics/SMLSYS$1.class
 ./com/skanderj/spotmylyrics/SML.class
 ./com/skanderj/spotmylyrics/SMLIO.class

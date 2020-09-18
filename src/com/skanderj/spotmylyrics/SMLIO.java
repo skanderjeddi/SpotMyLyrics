@@ -29,7 +29,7 @@ public final class SMLIO {
 	public static final String fetchSource(final String url, final Object... args) {
 		final String formattedURL = String.format(url, args);
 		if (SML.VERBOSE) {
-			System.out.printf("Fetching page source for %s", formattedURL);
+			System.out.printf("Fetching page source for %s\n", formattedURL);
 		}
 		URL urlObject = null;
 		try {
