@@ -158,7 +158,6 @@ public final class SML {
 					System.out.printf("Found an alias for %s: %s\n", answer, alias);
 				}
 				answer = answer.replaceAll(alias, this.aliases.get(alias)).strip();
-				originalAnswer = originalAnswer.replaceAll(alias, this.aliases.get(alias)).strip();
 			}
 		}
 		// We don't need the (feat...) part or the (- ...) part or the (with...) part
@@ -189,7 +188,7 @@ public final class SML {
 		if (SML.VERBOSE) {
 			System.out.printf("Found %s - %s\n", artist, track);
 		}
-		return new String[] { artist.replaceAll("[\\('\\)]", SML.EMPTY), track.replaceAll("[\\('\\)]", SML.EMPTY), strippedArtist.replaceAll("[\\('\\)]", SML.EMPTY), strippedTitle.replaceAll("[\\('\\)]", SML.EMPTY) };
+		return new String[] { artist, track, strippedArtist.replaceAll("[\\('\\)]", SML.EMPTY), strippedTitle.replaceAll("[\\('\\)]", SML.EMPTY) };
 	}
 
 	/**
@@ -215,7 +214,7 @@ public final class SML {
 		final String compliantArtist = spotifyAnswer[2], compliantTitle = spotifyAnswer[3];
 		String lyrics;
 		if ((lyrics = SMLIO.readWhole(this.getLocalCopy(artist, track))) == null) {
-			String source = SMLIO.fetchSource(SML.AZLYRICS_URL, this.formatArtist(compliantArtist), this.formatTitle(track));
+			String source = SMLIO.fetchSource(SML.AZLYRICS_URL, this.formatArtist(compliantArtist), this.formatTitle(compliantTitle));
 			if (source != null) {
 				source = this.formatSource(source);
 				lyrics = this.extractLyrics(source);
