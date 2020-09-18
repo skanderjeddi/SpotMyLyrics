@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import com.skanderj.spotmylyrics.SMLSYS.OS;
 import com.skanderj.ts4j.Task;
 import com.skanderj.ts4j.TaskScheduler;
 import com.skanderj.ts4j.TaskType;
@@ -25,7 +26,7 @@ public final class SML {
 	public static final String AZLYRICS_URL = "https://www.azlyrics.com/lyrics/%s/%s.html";
 
 	// Enable/disable verbose
-	public static final boolean VERBOSE = false;
+	public static final boolean VERBOSE = true;
 
 	/**
 	 * This comment is in all AZLyrics' lyrics pages and is located right before the
@@ -150,7 +151,10 @@ public final class SML {
 	 *         stripped track name }
 	 */
 	public String[] formatAnswer(String answer) {
-		String originalAnswer = new StringBuilder(answer).toString();
+		if (SMLSYS._OS == OS.WINDOWS) {
+			answer = answer.substring(1, answer.length() - 1).replaceFirst(" ' ", ", ").replaceAll("'", SML.EMPTY);
+		}
+		final String originalAnswer = new StringBuilder(answer).toString();
 		// If we have aliases setup
 		for (final String alias : this.aliases.keySet()) {
 			if (answer.contains(alias)) {
