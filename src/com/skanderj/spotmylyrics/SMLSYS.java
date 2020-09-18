@@ -9,7 +9,7 @@ public final class SMLSYS {
 	}
 
 	// Get the system OS
-	public static final SMLSYSOS OS = System.getProperty("os.name").toLowerCase().contains("win") ? SMLSYSOS.WINDOWS : System.getProperty("os.name").toLowerCase().contains("mac os") ? SMLSYSOS.MACOS : System.getProperty("os.name").toLowerCase().contains("linux") ? SMLSYSOS.LINUX : SMLSYSOS.OTHER;
+	public static final OS _OS = System.getProperty("os.name").toLowerCase().contains("win") ? OS.WINDOWS : System.getProperty("os.name").toLowerCase().contains("mac os") ? OS.MACOS : System.getProperty("os.name").toLowerCase().contains("linux") ? OS.LINUX : OS.OTHER;
 
 	// AppleScript code used to fetch the currently playing Spotify song (only on
 	// macOS)
@@ -48,7 +48,7 @@ public final class SMLSYS {
 		String answer = SML.EMPTY;
 		try {
 			String[] scriptArgs;
-			switch (SMLSYS.OS) {
+			switch (SMLSYS._OS) {
 			case WINDOWS:
 				scriptArgs = new String[] { "python", "./scripts/getspotifyinfowin.py" };
 				break;
@@ -74,7 +74,7 @@ public final class SMLSYS {
 		return answer;
 	}
 
-	public enum SMLSYSOS {
+	public enum OS {
 		WINDOWS, MACOS, LINUX, OTHER;
 	}
 }

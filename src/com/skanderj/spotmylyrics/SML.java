@@ -217,7 +217,7 @@ public final class SML {
 				lyrics = this.extractLyrics(source);
 			}
 		}
-		if (SMLSYS.OS == SMLSYS.SMLSYSOS.MACOS) {
+		if (SMLSYS.OS == SMLSYS.OS.MACOS) {
 			System.out.println("\033]0;" + artist + " - " + track + "\007");
 			if (lyrics != null) {
 				System.out.println((char) (27) + "[2J" + artist + " - " + track + "\n\n" + lyrics + "\n");
