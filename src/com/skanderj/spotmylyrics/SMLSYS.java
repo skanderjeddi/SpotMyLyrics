@@ -50,13 +50,13 @@ public final class SMLSYS {
 			String[] scriptArgs;
 			switch (SMLSYS._OS) {
 			case WINDOWS:
-				scriptArgs = new String[] { "python", "./scripts/getspotifyinfowin.py" };
+				scriptArgs = new String[] { "python", "./scripts/queryspotify.py", "win" };
 				break;
 			case MACOS:
 				scriptArgs = new String[] { "osascript", "-e", SMLSYS.APPLESCRIPT_CODE };
 				break;
 			case LINUX:
-				scriptArgs = new String[] { "python", "./scripts/getspotifyinfolinux.py" };
+				scriptArgs = new String[] { "python", "./scripts/queryspotify.py", "linux" };
 				break;
 			case OTHER:
 			default:

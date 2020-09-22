@@ -36,6 +36,8 @@ public final class SML {
 	 */
 	public static final String TARGET_WARNING = "<!-- Usage of azlyrics.com content by any third-party lyrics provider is prohibited by our licensing agreement. Sorry about that. -->";
 
+	public static final int REFRESH_TIME_MS = 250;
+
 	// Better for memory
 	public static final String EMPTY = new StringBuilder().toString(), SPACE = new StringBuilder(" ").toString();
 
@@ -150,6 +152,7 @@ public final class SML {
 	 *         stripped track name }
 	 */
 	public String[] formatAnswer(String answer) {
+		// DEBUG: System.out.println(answer);
 		String originalAnswer = new StringBuilder(answer).toString();
 		// If we have aliases setup
 		for (final String alias : this.aliases.keySet()) {
@@ -302,11 +305,11 @@ public final class SML {
 	}
 
 	/**
-	 * Uses my TS4J scheduling API for fetching the current song every 500ms when
+	 * Uses my TS4J scheduling API for fetching the current song every REFRESH_TIME_MS when
 	 * enabled and printing lyrics accordingly.
 	 */
 	public void enableAutoRefreshing() {
-		TaskScheduler.scheduleTask("SpotifyQuery", new Task(new TimeValue(0, TimeUnit.MILLISECONDS), new TimeValue(500, TimeUnit.MILLISECONDS)) {
+		TaskScheduler.scheduleTask("SpotifyQuery", new Task(new TimeValue(0, TimeUnit.MILLISECONDS), new TimeValue(SML.REFRESH_TIME_MS, TimeUnit.MILLISECONDS)) {
 			private String[] previousSpotifyAnswer;
 
 			@Override
