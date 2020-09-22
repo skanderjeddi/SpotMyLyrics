@@ -25,7 +25,7 @@ public final class SML {
 	public static final String AZLYRICS_URL = "https://www.azlyrics.com/lyrics/%s/%s.html";
 
 	// Enable/disable verbose
-	public static final boolean VERBOSE = false;
+	public static final boolean VERBOSE = true;
 
 	/**
 	 * This comment is in all AZLyrics' lyrics pages and is located right before the
