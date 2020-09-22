@@ -153,7 +153,7 @@ public final class SML {
 	 */
 	public String[] formatAnswer(String answer) {
 		// DEBUG: System.out.println(answer);
-		String originalAnswer = new StringBuilder(answer).toString();
+		final String originalAnswer = new StringBuilder(answer).toString();
 		// If we have aliases setup
 		for (final String alias : this.aliases.keySet()) {
 			if (answer.contains(alias)) {
