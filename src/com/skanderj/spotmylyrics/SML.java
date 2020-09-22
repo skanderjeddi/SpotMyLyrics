@@ -25,7 +25,7 @@ public final class SML {
 	public static final String AZLYRICS_URL = "https://www.azlyrics.com/lyrics/%s/%s.html";
 
 	// Enable/disable verbose
-	public static final boolean VERBOSE = true;
+	public static final boolean VERBOSE = false;
 
 	/**
 	 * This comment is in all AZLyrics' lyrics pages and is located right before the
@@ -152,7 +152,6 @@ public final class SML {
 	 *         stripped track name }
 	 */
 	public String[] formatAnswer(String answer) {
-		// DEBUG: System.out.println(answer);
 		final String originalAnswer = new StringBuilder(answer).toString();
 		// If we have aliases setup
 		for (final String alias : this.aliases.keySet()) {
@@ -160,7 +159,7 @@ public final class SML {
 				if (SML.VERBOSE) {
 					System.out.printf("Found an alias for %s: %s\n", answer, alias);
 				}
-				answer = answer.replaceAll(alias, this.aliases.get(alias)).strip();
+				answer = answer.replace(alias, this.aliases.get(alias)).strip();
 			}
 		}
 		// We don't need the (feat...) part or the (- ...) part or the (with...) part
