@@ -58,7 +58,7 @@ def get_info_linux():
         spotify_properties = dbus.Interface(spotify_bus, "org.freedesktop.DBus.Properties")
         metadata = spotify_properties.Get("org.mpris.MediaPlayer2.Player", "Metadata")
     except dbus.exceptions.DBusException:
-        raise SpotifyClosed
+        return "CLOSED"
 
     track = str(metadata['xesam:title'])
     # When this function is called and Spotify hasn't finished setting up the dbus properties, the artist field
@@ -111,11 +111,17 @@ def get_info_mac():
 def current():
     try:
         if sys.platform.startswith("win"):
-            return get_info_windows()
+            info = get_info_windows()
         elif sys.platform.startswith("darwin"):
-            return get_info_mac()
+            info = get_info_mac()
         else:
-            return get_info_linux()
+            info = get_info_linux()
+    if info == "CLOSED":
+        return [ "CLOSED" ]
+    elif info == "PAUSED":
+        return [ "PAUSED" ]
+    else:
+        return info
 
 
 def artist():
